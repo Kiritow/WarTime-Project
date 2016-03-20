@@ -12,11 +12,16 @@
 ///User Info Structure
 struct userinfo
 {
+    public:
+    userinfo();
+    ~userinfo();
+    int getid();
+    const char* getusername();
+    const char* getuuid();
+    private:
     int id;
     char* username;
     char* uuid;
-    userinfo();
-    ~userinfo();
 };
 
 ///Login Checker and fetch user info.
