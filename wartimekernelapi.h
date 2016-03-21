@@ -34,7 +34,7 @@ char* kernel_encoder(const char* RawString,char* TargetString,int buffsize);
 int kernel_sendmsg(const char* Message);
 
 ///Check unread message on server
-int kernel_checkmessage();
+int kernel_checkmsg();
 
 ///Receive message from server
 int kernel_recvmsg(char* targetbuff,int buffsize);
