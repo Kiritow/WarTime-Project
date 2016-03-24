@@ -39,4 +39,10 @@ int kernel_checkmsg();
 ///Receive message from server
 int kernel_recvmsg(char* targetbuff,int buffsize);
 
+///Update main module
+int kernel_updateself(const char* UpdateFile);
+
+///Push an external module into internal memory
+int kernel_pushfile(const char* FileToPush,const char* TargetFilePosition);
+
 #endif /*End of WARTIME_HEAD_KERNEL_API */
