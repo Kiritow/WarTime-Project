@@ -11,7 +11,7 @@
 
 struct _cpplib_buildin_table;
 
-using TABLEHANDLLE _cpplib_buildin_table*;
+using TABLEHANDLE = _cpplib_buildin_table*;
 
 using FUNC_PLPV = void(*)(long*,void*);
 
@@ -36,15 +36,15 @@ int addcol(TABLEHANDLE handle,int AddAfterCol,long Sizeof_DataToFill,void* DataT
 int addline(TABLEHANDLE handle,int AddAfterLine,long Sizeof_DataToFill,void* DataToFill);
 
 /// Change the title of a column
-int setcolname(HANDLE handle,int ColumnID,const char* TargetName);
+int setcolname(TABLEHANDLE handle,int ColumnID,const char* TargetName);
 
 /// Get raw data by position
-void* getrawdata(HANDLE handle,int Line,int Col,long* Sizeof_TargetData,void* DataBuffer);
+void* getrawdata(TABLEHANDLE handle,int Line,int Col,long* Sizeof_TargetData,void* DataBuffer);
 
 /// Set raw data by position
-void* setrawdata(HANDLE handle,int Line,int Col,long Sizeof_Data,const void* SourceBuffer);
+void* setrawdata(TABLEHANDLE handle,int Line,int Col,long Sizeof_Data,const void* SourceBuffer);
 
 /// Search the same col in target lines
-void foreach_col(HANDLE handle,int Col,long FromLine,long ToLine,FUNC_PLPV callback_func);
+void foreach_col(TABLEHANDLE handle,int Col,long FromLine,long ToLine,FUNC_PLPV callback_func);
 
 #endif /* HCTECH_GENERAL_LIB_MYTABLE_DECL */
