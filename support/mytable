@@ -9,6 +9,10 @@
 #ifndef HCTECH_GENERAL_LIB_MYTABLE_DECL
 #define HCTECH_GENERAL_LIB_MYTABLE_DECL
 
+struct _cpplib_buildin_table;
+
+using TABLEHANDLLE _cpplib_buildin_table*;
+
 using FUNC_PLPV = void(*)(long*,void*);
 
 /** Declarations */
