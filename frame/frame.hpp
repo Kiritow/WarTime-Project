@@ -5,8 +5,6 @@
 #ifndef WARTIME_FRAME
 #define WARTIME_FRAME
 
-#include <frame/frame.cpp>
-
 namespace _wartime_buildin_namespace
 {
     class noncopyable
@@ -60,6 +58,8 @@ namespace _wartime_buildin_namespace
     };
     int clientmessagebus_class::_singleton=0;
 }/// End of namespace _wartime_buildin_namespace
+
+#include <frame/frame.cpp>
 
 _wartime_buildin_namespace::c_s_class cscenter;
 _wartime_buildin_namespace::clientmessagebus_class messagebus;
