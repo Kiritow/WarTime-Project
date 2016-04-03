@@ -7,8 +7,8 @@
 *   Platform Provider: LinuxWindowSDK Platform
 */
 
-#ifndef WARTIME_HEAD_PRINT
-#define WARTIME_HEAD_PRINT
+#ifndef WARTIME_PRINT
+#define WARTIME_PRINT
 
 /// Enum class of supported color.
 enum Color {black=0,red,green,yellow,blue,purple,lightblue,white};
@@ -27,4 +27,4 @@ int synchronizedChangeColor(Color ForegroundColor,Color BackgroundColor);
 class Screen;
 class Surface;
 
-#endif /** End of WARTIME_HEAD_PRINT */
+#endif /** End of WARTIME_PRINT */
