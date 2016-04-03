@@ -6,8 +6,8 @@
 *   Provider: Game Harbor (HC TECH)
 */
 
-#ifndef WARTIME_HEAD_KERNEL_API
-#define WARTIME_HEAD_KERNEL_API
+#ifndef WARTIME_KERNEL_API
+#define WARTIME_KERNEL_API
 
 ///User Info Structure
 struct userinfo
@@ -45,4 +45,4 @@ int kernel_updateself(const char* UpdateFile);
 ///Push an external module into internal memory
 int kernel_pushfile(const char* FileToPush,const char* TargetFilePosition);
 
-#endif /*End of WARTIME_HEAD_KERNEL_API */
+#endif /*End of WARTIME_KERNEL_API */
