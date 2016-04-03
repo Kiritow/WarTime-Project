@@ -5,6 +5,8 @@
 #ifndef WARTIME_MAPINFO
 #define WARTIME_MAPINFO
 
+#error /// WARNING: This file is being modified.
+
 #include <cmath>
 
 struct _block
