@@ -1,3 +1,4 @@
+[English](https://github.com/Kiritow/WarTime-Project#wartime-project) | [中文(简体)](https://github.com/Kiritow/WarTime-Project#战争时代)  
 # WarTime-Project  
 [HC TECH] WarTime Project (2016)  
 
