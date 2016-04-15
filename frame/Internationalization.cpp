@@ -12,6 +12,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <stdexcept>
 /** Type Define of MHANDLE
 *   This will become a standard of CPPLIB Handle System.
 *   Till now, name "MHANDLE", "CHANDLE", "KHANDLE" are candidates.
@@ -62,6 +63,23 @@ MHANDLE GetStringGetter(const std::string& FileName)
 void DestoryStringGetter(MHANDLE handle)
 {
     delete static_cast<std::vector<std::pair<int,std::string>>*>(handle);
+}
+
+std::string GetStringByID(MHANDLE handle,int id) throw(std::runtime_error)
+{
+    if(handle==nullptr)
+    {
+        throw std::runtime_error("GetStringByID: Cannot operate NULL handle.");
+    }
+    auto ihand=static_cast<std::vector<std::pair<int,std::string>>*>(handle);
+    for(auto& i:*ihand)
+    {
+        if(i.first==id)
+        {
+            return i.second;
+        }
+    }
+    throw std::runtime_error("GetStringByID: Cannot Find Target String.");
 }
 
 _WARTIME_NAMESPACE_END
