@@ -48,13 +48,12 @@ MHANDLE GetStringGetter(const std::string& FileName)
     {
         return nullptr;
     }
-    std::string s;
-    while(std::getline(ifs,s))
+    int id;
+    while(ifs>>id)
     {
-        std::istringstream iss(s);
-        int id;
+        ifs.ignore(1);
         std::string k;
-        iss>>id>>k;
+        std::getline(ifs,k);
         handle->push_back(std::pair<int,std::string>(id,k));
     }
     return handle;
