@@ -41,6 +41,9 @@ Use `NEWTHREAD` to create an asynchronous thread.
 Use `ISOVER` to test if the thread is over.  
 ####Example Code  
 ```
+#include <iostream>
+using namespace std;
+
 FUNCTION_STD(func)
 FUNCTION_START
 cout<<"In func"<<endl;
@@ -48,7 +51,7 @@ FUNCTION_END
 
 int main()
 {
-    NEWTHREAD(td,func);
+    NEWTHREAD(LAUNCH_JOIN,td,func);
     cout<<ISOVER(td)<<endl;
     this_thread::sleep_for(chrono::seconds(2));
     cout<<ISOVER(td)<<endl;
