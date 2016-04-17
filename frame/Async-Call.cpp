@@ -10,23 +10,29 @@
 #ifndef CPPLIB_TRX_ASYNC_CALL
 #define CPPLIB_TRX_ASYNC_CALL
 
+#include <thread>
+using namespace std;
+
 #define FUNCTION_STD(FuncName,args...) void FuncName(int* _buildin_trg,##args)
-#define FUNCTION_START {
-#define FUNCTION_END *_buildin_trg=1;}
+#define FUNCTION_START {*_buildin_trg=1;
+#define FUNCTION_END *_buildin_trg=2;}
 
-#define NEWTHREAD(ThreadName,ThreadFunc,args...) _buildin_threadpack _buildin_threadpack_pack_##ThreadName(new thread(ThreadFunc,_buildin_threadpack_pack_##ThreadName.getpint(),##args))
-#define ISOVER(ThreadName) (_buildin_threadpack_pack_##ThreadName.getint()==1)
+#define NEWTHREAD(LaunchType,ThreadName,ThreadFunc,args...) _buildin_threadpack _buildin_threadpack_pack_##ThreadName(LaunchType,new thread(ThreadFunc,_buildin_threadpack_pack_##ThreadName.getpint(),##args))
+#define ISOVER(ThreadName) (_buildin_threadpack_pack_##ThreadName.getint()==2)
 
+#define LAUNCH_JOIN 0
+#define LAUNCH_DETACH 1
 class _buildin_threadpack
 {
 private:
     thread* s;
     int status;
+    int launch_type;
 public:
-    _buildin_threadpack(thread* ins)
+    _buildin_threadpack(int inclaunch_type,thread* ins)
     {
-        status=0;
         s=ins;
+        launch_type=inclaunch_type;
     }
     int getint()
     {
@@ -40,7 +46,14 @@ public:
     {
         if(s!=nullptr)
         {
-            s->join();
+        	if(launch_type==LAUNCH_JOIN)
+            {
+            	s->join();
+            }
+            else
+            {
+            	s->detach();
+            }
         }
         delete s;
     }
