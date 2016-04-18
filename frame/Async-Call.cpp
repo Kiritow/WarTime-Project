@@ -13,6 +13,10 @@
 #include <thread>
 using namespace std;
 
+#define CAN_USE_FUTURE (ATOMIC_INT_LOCK_FREE>1)
+#if CAN_USE_FUTURE
+#error This platform supports std::future and std::async, please switch your code to C++ Standard.
+#else
 #define FUNCTION_STD(FuncName,args...) void FuncName(int* _buildin_trg,##args)
 #define FUNCTION_START {*_buildin_trg=1;
 #define FUNCTION_END *_buildin_trg=2;}
@@ -22,6 +26,8 @@ using namespace std;
 
 #define LAUNCH_JOIN 0
 #define LAUNCH_DETACH 1
+#endif // End of if CAN_USE_FUTURE
+
 class _buildin_threadpack
 {
 private:
@@ -44,7 +50,7 @@ public:
     }
     ~_buildin_threadpack()
     {
-        if(s!=nullptr)
+    	if(s!=nullptr)
         {
         	if(launch_type==LAUNCH_JOIN)
             {
