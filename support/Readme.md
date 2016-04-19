@@ -15,6 +15,7 @@ This header provides some cross-platform functions to operate external file syst
 This header showes functions that may be supported on different platforms.  
 ##Other Used External API  
 Light open-source cross-platform database : [MyTable](https://github.com/Kiritow/MyTable "Light open-source cross-platform database: MyTable")  
+HC Script Object Notation : [HSON](https://github.com/Kiritow/HSON "HC Script Object Notation (HSON)")  
 
 ##In Progress...
 Some header are being edited recently. Please pay attention and avoid including these headers.  
