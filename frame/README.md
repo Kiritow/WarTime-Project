@@ -1,4 +1,4 @@
-[Frame](https://github.com/Kiritow/WarTime-Project/tree/master/frame#frame) | [Internationalization Frame](https://github.com/Kiritow/WarTime-Project/tree/master/frame#internationalization-frame) | [Asynchronous Call Frame](https://github.com/Kiritow/WarTime-Project/tree/master/frame#asynchronous-call-frame)  
+[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame](#asynchronous-call-frame)  
 #Frame  
 This directory contains the main frame of WarTime.  
 >Get access to frame by `#include <frame/frame.hpp>`.  
