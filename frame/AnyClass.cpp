@@ -55,9 +55,12 @@ struct Any
 	template<class U>
 	U& AnyCast(bool showmsg=false)
 	{
-		if (!Is<U>()&&showmsg)
+		if (!Is<U>())
 		{
-			std::cout << "can not cast " << getfulltypename(typeid(U).name()) << " to " << getfulltypename(m_tpIndex.name()) << std::endl;
+			if(showmsg)
+			{
+				std::cout << "can not cast " << getfulltypename(typeid(U).name()) << " to " << getfulltypename(m_tpIndex.name()) << std::endl;
+			}
 			throw std::logic_error{"bad cast"};
 		}
 
