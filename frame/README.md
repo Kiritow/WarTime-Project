@@ -1,4 +1,4 @@
-[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame](#asynchronous-call-frame)  
+[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame](#asynchronous-call-frame) | [Any Class Frame](#any-class-frame)  
 #Frame  
 This directory contains the main frame of WarTime.  
 >Get access to frame by `#include <frame/frame.hpp>`.  
@@ -58,3 +58,49 @@ int main()
     return 0;
 }
 ```
+
+#Any Class Frame  
+>Get access to this frame by `#include <frame/AnyClass.cpp>`  
+
+This source file is from [qicosmos/cosmos](https://github.com/qicosmos/cosmos/blob/master/Any.hpp "C++11 Example Codes").  
+Rewritten for [WarTime-Project](https://github.com/Kiritow/WarTime-Project "WarTime-Project On GitHub Main Page")  
+**Any Class** provides a simple way of managing different types of data.  
+
+####Example Code  
+```
+#include <string>
+using namespace std;
+
+int main()
+{
+    Any n;
+    string s="Hello";
+    n=s;
+    try
+    {
+        int ss=n.AnyCast<int>();
+        cout<<"Int:"<<ss<<endl;
+    }
+    catch(...)
+    {
+        cout<<"Cannot cast."<<endl;
+    }
+    try
+    {
+        string kk=n.AnyCast<string>();
+        cout<<"String:"<<kk<<endl;
+    }
+    catch(...)
+    {
+        cout<<"Cannot Cast."<<endl;
+    }
+    return 0;
+}
+```
+Result would be:
+```
+can not cast i to Ss
+Cannot cast.
+String:Hello
+```
+
