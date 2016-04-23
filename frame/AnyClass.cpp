@@ -53,9 +53,9 @@ struct Any
 
 	//将Any转换为实际的类型
 	template<class U>
-	U& AnyCast()
+	U& AnyCast(bool showmsg=false)
 	{
-		if (!Is<U>())
+		if (!Is<U>()&&showmsg)
 		{
 			std::cout << "can not cast " << getfulltypename(typeid(U).name()) << " to " << getfulltypename(m_tpIndex.name()) << std::endl;
 			throw std::logic_error{"bad cast"};
