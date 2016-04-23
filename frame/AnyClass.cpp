@@ -11,6 +11,29 @@
 #include <exception>
 #include <iostream>
 
+
+#include <cxxabi.h>
+#include <string>
+
+/** For GCC/G++ Complier
+*   Use abi::__cxa_demangle(C-Style String Returned by typeid(T).name(),nullptr,nullptr,nullptr)
+*       to get full name of type T.
+*
+*   For MSVC Complier
+*   typeid(T).name() returns the full name. Just repack it.
+*/
+#ifdef __GNUC__ /// For GCC/G++ Complier
+std::string getfulltypename(const char* TypeIDName)
+{
+    return std::string(abi::__cxa_demangle(TypeIDName,nullptr,nullptr,nullptr));
+}
+#else /// For MSVC Complier
+std::string getfulltypename(const char* TypeIDName)
+{
+    return std::string(TypeIDName);
+}
+#endif /// end of ifdef __GNUC__
+
 struct Any
 {
 	Any(void) : m_tpIndex(std::type_index(typeid(void))) {}
@@ -34,7 +57,7 @@ struct Any
 	{
 		if (!Is<U>())
 		{
-			std::cout << "can not cast " << typeid(U).name() << " to " << m_tpIndex.name() << std::endl;
+			std::cout << "can not cast " << getfulltypename(typeid(U).name()) << " to " << getfulltypename(m_tpIndex.name()) << std::endl;
 			throw std::logic_error{"bad cast"};
 		}
 
