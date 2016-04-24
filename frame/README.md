@@ -99,7 +99,7 @@ int main()
 ```
 Result would be:
 ```
-can not cast int to std::string
+can not cast std::string to int
 Cannot cast.
 String:Hello
 ```
