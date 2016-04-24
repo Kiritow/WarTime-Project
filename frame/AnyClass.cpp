@@ -59,7 +59,7 @@ struct Any
 		{
 			if(showmsg)
 			{
-				std::cout << "can not cast " << getfulltypename(typeid(U).name()) << " to " << getfulltypename(m_tpIndex.name()) << std::endl;
+				std::cout << "can not cast " << getfulltypename(m_tpIndex.name()) << " to " << getfulltypename(typeid(U).name()) << std::endl;
 			}
 			throw std::logic_error{"bad cast"};
 		}
