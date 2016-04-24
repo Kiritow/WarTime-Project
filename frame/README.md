@@ -78,7 +78,7 @@ int main()
     n=s;
     try
     {
-        int ss=n.AnyCast<int>();
+        int ss=n.AnyCast<int>(true);
         cout<<"Int:"<<ss<<endl;
     }
     catch(...)
@@ -99,7 +99,7 @@ int main()
 ```
 Result would be:
 ```
-can not cast i to Ss
+can not cast int to std::string
 Cannot cast.
 String:Hello
 ```
