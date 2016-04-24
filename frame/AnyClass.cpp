@@ -53,7 +53,7 @@ struct Any
 
 	//将Any转换为实际的类型
 	template<class U>
-	U& AnyCast(bool showmsg=false)
+	U& AnyCast(bool showmsg=false) throw (std::logic_error)
 	{
 		if (!Is<U>())
 		{
