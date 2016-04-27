@@ -93,14 +93,6 @@ private:
 	blob(blobtype inctype) : type(inctype) { }
 };
 
-
-string getfile()
-{
-	char buff[1024];
-	bzero(buff,1024);
-	return gettmpfile(buff,1024);
-}
-
 /** Exception For Blob */
 
 class curl_error : public basic_exception
