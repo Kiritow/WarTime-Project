@@ -1,4 +1,4 @@
-[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame](#asynchronous-call-frame) | [Any Class Frame](#any-class-frame)  
+[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame](#asynchronous-call-frame) | [Any Class Frame](#any-class-frame) | [Blob Frame](#blob-frame)  
 #Frame  
 This directory contains the main frame of WarTime.  
 >Get access to frame by `#include <frame/frame.hpp>`.  
@@ -102,5 +102,17 @@ Result would be:
 can not cast std::string to int
 Cannot cast.
 String:Hello
+```
+
+#Blob Frame  
+>Get access to this frame by `#include <frame/blob.cpp>`.  
+
+Blob Frame is designed for managing **Binary Large Object**.  
+A few functions work with `class Blob`. Such as `getwebpage()` and `loadbinfile()`.  
+
+##Example Code  
+```
+blob s=getwebpage("www.google.com");
+printf("%s\n",s.text.str.c_str());
 ```
 
