@@ -179,19 +179,3 @@ blob loadbinfile(const string& binaryfile) throw(file_error,mem_error)
 	b.bin.size=sz+8;
 	return b;
 }
-
-/*
-int main()
-{
-	blob s=loadbinfile("/sdcard/ebusybox");
-	for(int i=0;i<s.bin.size;i++)
-	printf("%d ",((char*)(s.bin.data))[i]);
-}
-*/
-int main()
-{
-    busybox_init_env({"/data/data/com.n0n3m4.droidc/bzbox"});
-	putenv("LD_LIBRARY_PATH=/data/data/com.n0n3m4.droidc/bzbox/");
-	blob s=getwebpage("www.baidu.com");
-	printf("%s\n",s.text.str.c_str());
-}
