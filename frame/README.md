@@ -1,4 +1,4 @@
-[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame](#asynchronous-call-frame) | [Any Class Frame](#any-class-frame) | [Blob Frame](#blob-frame)  
+[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame 2](#asynchronous-call-frame-2) | [Asynchronous Call Frame (Deprecated)](#asynchronous-call-frame-(deprecated)) | [Any Class Frame](#any-class-frame) | [Blob Frame](#blob-frame)  
 #Frame  
 This directory contains the main frame of WarTime.  
 >Get access to frame by `#include <frame/frame.hpp>`.  
@@ -29,7 +29,65 @@ A package (type *std::pair<int,std::string>*) contains a key (type *int*) and a 
 The frame will load packages from files. Use `GetStringByID` to get string by the key.  
 Results may be different after language setting being changed.  
 
-#Asynchronous Call Frame  
+#Asynchronous Call Frame 2  
+>Get access to this frame by `#include <frame/Async-Call-2.cpp>`.
+
+**Warning**: This frame (ver 2) is incompatible with ver 1.  
+####Function Declarations
+Use `THREAD_FUNC` to declare a function following CPPLIB-TRX-ASYNC-CALL(Ver. 2) standard.  
+Use `FUNC_BEGIN` at the beginning of the function.  
+Use `FUNC_END` at the end of the function.  
+Use `CANCEL_POINT` where your procedure can be canceled.  
+Use `SETANS` to set the return value.  
+####Thread Declarations
+Use `NEW_ASYNC_THREAD` to run a new asynchronous thread.  
+Use `CANCEL_THREAD` to try to stop a running thread.  
+Use `ISOVER` to test if the thread is over.  
+Use `WAIT_FOR` to wait for the end of the processing thread.  
+Use `GETANS` to get answer. This will call `WAIT_FOR` to wait for the answer.  
+####Example Code
+```
+#include <cstdio>
+struct pod_data
+{
+	int a;
+	int b;
+};
+
+THREAD_FUNC(pod_data,func)
+FUNC_BEGIN
+{
+	printf("Start in thread\n");
+	CANCLE_POINT;
+	this_thread::sleep_for(chrono::seconds(5));
+	CANCLE_POINT;
+	pod_data k;
+	k.a=99;
+	k.b=88;
+	SETANS(k);
+	printf("End of thread\n");
+}
+FUNC_END
+
+int main()
+{
+	pod_data s;
+	NEW_ASYNC_THREAD(myid,pod_data,func);
+	s=GETANS(myid);
+	printf("Answer is %d %d\n",s.a,s.b);
+	printf("END OF MAIN\n");
+	return 0;
+}
+```
+Result would be:
+```
+Start in thread
+End of thread
+Answer is 99 88
+END OF MAIN
+```
+
+#Asynchronous Call Frame (Deprecated)
 >Get access to this frame by `#include <frame/Async-Call.cpp>`.  
 
 ####Function Declaration  
