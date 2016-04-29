@@ -19,7 +19,7 @@ using namespace std;
 #define THREAD_FUNC(Type,name,args...) void name(bool* pover,bool* pcancle,Type* panswer,##args)
 #define FUNC_BEGIN {*pover=false;*pcancle=false;
 #define SETANS(data) *panswer=data;
-#define CANCLE_POINT {if(*pcancle) return;}
+#define CANCEL_POINT {if(*pcancle) return;}
 #define FUNC_END *pover=true;}
 
 #ifdef DEBUG
@@ -32,7 +32,7 @@ using namespace std;
 
 #define NEW_ASYNC_THREAD(id,Type,thread_func,args...)  bool id##_OVER=false;bool id##_CANCLE=false;Type id##_ANSWER;thread id##_TD(thread_func,&id##_OVER,&id##_CANCLE,&id##_ANSWER,##args);id##_TD.detach();
 
-#define CANCLE_THREAD(id) id##_CANCLE=true;
+#define CANCEL_THREAD(id) id##_CANCLE=true;
 #define ISOVER(id) (id##_OVER)
 #define WAIT_FOR(id) {while(!id##_OVER);}
 #define GETANS(id) [&](){if(ISOVER(id)) {return id##_ANSWER;}else{WAIT_FOR(id);return id##_ANSWER;}}();
