@@ -1,4 +1,4 @@
-[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame 2](#asynchronous-call-frame-2) | [Asynchronous Call Frame (Deprecated)](#asynchronous-call-frame-(deprecated)) | [Any Class Frame](#any-class-frame) | [Blob Frame](#blob-frame)  
+[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame 2](#asynchronous-call-frame-2) | [Asynchronous Call Frame (Deprecated)](#asynchronous-call-frame-deprecated) | [Any Class Frame](#any-class-frame) | [Blob Frame](#blob-frame)  
 #Frame  
 This directory contains the main frame of WarTime.  
 >Get access to frame by `#include <frame/frame.hpp>`.  
@@ -58,9 +58,9 @@ THREAD_FUNC(pod_data,func)
 FUNC_BEGIN
 {
 	printf("Start in thread\n");
-	CANCLE_POINT;
+	CANCEL_POINT;
 	this_thread::sleep_for(chrono::seconds(5));
-	CANCLE_POINT;
+	CANCEL_POINT;
 	pod_data k;
 	k.a=99;
 	k.b=88;
