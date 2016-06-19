@@ -43,6 +43,10 @@ Use `SETANS` to set the return value.
 Use `NEW_ASYNC_THREAD` to run a new asynchronous thread.  
 **New** Use `NEW_BACKGROUND_THREAD` to start a background thread. This thread cannot set return value.  
 **New** Use `NEW_DETACHED_THREAD` to start a detached thread. This thread cannot set return value and cannot be canceled.  
+Use `CANCEL_THREAD` to try to stop a running thread.  
+Use `ISOVER` to test if the thread is over.  
+Use `WAIT_FOR` to wait for the end of the processing thread.  
+Use `GETANS` to get answer. This will call `WAIT_FOR` to wait for the answer.  
 ####Example Code
 ```
 #include <cstdio>
