@@ -1,4 +1,4 @@
-[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame 2](#asynchronous-call-frame-2) | [Asynchronous Call Frame (Deprecated)](#asynchronous-call-frame-deprecated) | [Any Class Frame](#any-class-frame) | [Blob Frame](#blob-frame)  
+[Frame](#frame) | [Internationalization Frame](#internationalization-frame) | [Asynchronous Call Frame 3](#asynchronous-call-frame-3) | [Asynchronous Call Frame 2](#asynchronous-call-frame-2) | [Asynchronous Call Frame (Deprecated)](#asynchronous-call-frame-deprecated) | [Any Class Frame](#any-class-frame) | [Blob Frame](#blob-frame)  
 #Frame  
 This directory contains the main frame of WarTime.  
 >Get access to frame by `#include <frame/frame.hpp>`.  
@@ -28,6 +28,43 @@ This frame holds lots of packages.
 A package (type *std::pair<int,std::string>*) contains a key (type *int*) and a string (type *std::string**).  
 The frame will load packages from files. Use `GetStringByID` to get string by the key.  
 Results may be different after language setting being changed.  
+
+#Asynchronous Call Frame 3  
+>Get access to this frame by `#include <frame/Async-Call-3.cpp>`.
+
+**Warning**: This frame (ver 3) is incompatible with ver 2 and ver 1.  
+####Function Declarations  
+Use `THREAD_FUNC` to declare a function following CPPLIB-TRX-ASYNC-CALL(Ver. 2) standard.  
+Use `FUNC_BEGIN` at the beginning of the function.  
+Use `FUNC_END` at the end of the function.  
+Use `CANCEL_POINT` where your procedure can be canceled.  
+Use `SETANS` to set the return value.  
+####Thread Declarations  
+Use `NEW_ASYNC_THREAD` to run a new asynchronous thread.  
+**New** Use `NEW_BACKGROUND_THREAD` to start a background thread. This thread cannot set return value.  
+**New** Use `NEW_DETACHED_THREAD` to start a detached thread. This thread cannot set return value and cannot be canceled.  
+####Example Code
+```
+#include <cstdio>
+
+THREAD_FUNC(int,func,int a)
+FUNC_BEGIN
+{
+    printf("Args is %d\n",a);
+    SETANS(3);
+}
+FUNC_END
+
+int main()
+{
+    NEW_ASYNC_THREAD(tid,int,func,99);
+    WAIT_FOR(tid);
+}
+```
+Result would be
+```
+Args is 99
+```
 
 #Asynchronous Call Frame 2  
 >Get access to this frame by `#include <frame/Async-Call-2.cpp>`.
