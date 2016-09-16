@@ -122,25 +122,24 @@ _cpplib_buildin_namespace::dlibctrl_center.add(manager);\
 return unique_ptr<_cpplib_buildin_namespace::dlibctrl_manager>(manager);\
 }()
 
-#define getfunc(ReturnType,FunctionName,Args...) ReturnType(*FunctionName)(##Args)=[]()->ReturnType(*)(##Args)\
+#define getfunc(ReturnType,FunctionName,FirstArg,Args...) ReturnType(*FunctionName)(FirstArg,##Args)=[]()->ReturnType(*)(FirstArg,##Args)\
 {\
 void* p=NULL;\
 if((p=_cpplib_buildin_namespace::dlibctrl_center.find(#FunctionName))==NULL)\
 {\
     return NULL;\
 }\
-return (ReturnType(*)(##Args))p;\
+return (ReturnType(*)(FirstArg,##Args))p;\
 }()
 
-
-#define getfuncin(Label,ReturnType,FunctionName,Args...) ReturnType(*FunctionName)(##Args)=[]()->ReturnType(*)(##Args)\
+#define getfuncin(Label,ReturnType,FunctionName,FirstArg,Args...) ReturnType(*FunctionName)(FirstArg,##Args)=[]()->ReturnType(*)(FirstArg,##Args)\
 {\
 void* p=NULL;\
 if((p=_cpplib_buildin_namespace::dlibctrl_center.findin(#FunctionName,Label.get()))==NULL)\
 {\
     return NULL;\
 }\
-return (ReturnType(*)(##Args))p;\
+return (ReturnType(*)(FirstArg,##Args))p;\
 }()
 
 #endif /// _CPPIMPORT_H
