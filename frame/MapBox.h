@@ -2,6 +2,9 @@
 *   Based On STL(map) and Base64. GSOCK General interface Supported.
 *   Created By Kiritow.
 *   Created On: 20161002
+*   Change Log:
+*   20161006: MapBox--GSOCK::recv problems solved. Base64 Decoded.
+*
 */
 #ifndef _KIRITOW_MAPBOX
 #define _KIRITOW_MAPBOX
@@ -112,7 +115,8 @@ int sock::recv(MapBox& box)
         char* q=strstr(p,":");
         char* t=strstr(p,";");
         if(!q||!t) break;
-        box.add(ans.substr(p-tp,q-p),ans.substr(q-tp+1,t-q+1));
+        box.add(base64_decode(ans.substr(p-tp,q-p)),base64_decode(ans.substr(q-tp+1,t-q-1)));
+        p=t+1;
     }
     return recd+sizeof(int);
 }
