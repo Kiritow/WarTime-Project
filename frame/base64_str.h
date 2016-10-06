@@ -1,7 +1,7 @@
 /*
    base64.cpp and base64.h
 
-   Copyright (C) 2004-2008 René Nyffenegger
+   Copyright (C) 2004-2008 Ren¨¦ Nyffenegger
 
    This source code is provided 'as-is', without any express or implied
    warranty. In no event will the author be held liable for any damages
@@ -21,9 +21,22 @@
 
    3. This notice may not be removed or altered from any source distribution.
 
-   René Nyffenegger rene.nyffenegger@adp-gmbh.ch
+   Ren¨¦ Nyffenegger rene.nyffenegger@adp-gmbh.ch
 
 */
+
+/** CPPLIB Extends : Base64 Algorithm
+*   NOTICE: This file is from the Internet. It is chosen because of its good C++ Style.
+*       This Algorithm may not be the most fast.
+*   CHANGES: We renamed this file to base64_basic.h instead of change its main functions.
+*       Other CPPLIB Extended Functions are stored in base64_raw.h.
+*       We will provide a file named base64.h, in which both two head file will be included.
+*
+*   NOTICED ON : 20161006 by HC TECH - CPPLIB
+*/
+
+#ifndef _cpplib_extends_base64_str
+#define _cpplib_extends_base64_str
 
 #include <iostream>
 #include <string>
@@ -130,3 +143,5 @@ std::string base64_decode(std::string const& encoded_string)
 
     return ret;
 }
+
+#endif /// End of _cpplib_extends_base64_str(base64_str.h)
