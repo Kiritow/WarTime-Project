@@ -9,6 +9,10 @@
 #ifndef _KIRITOW_RAWBOX
 #define _KIRITOW_RAWBOX
 
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
 #include <string>
 #include <sstream>
 #include "base64_raw.h"
@@ -23,7 +27,7 @@ class RawBox
 		data=nullptr;
 		sz=0;
 	}
-	RawBox(const void* pdata,int datasz)
+	RawBox(const RAWBYTE* pdata,int datasz)
 	{
 		setdata(pdata,datasz);
 	}
@@ -32,7 +36,7 @@ class RawBox
 		if(data) free(data);
 		data=nullptr;
 	}
-	int setdata(const void* pdata,int datasz)
+	int setdata(const RAWBYTE* pdata,int datasz)
 	{
 		if(data) free(data);
 		data=nullptr;
@@ -41,6 +45,7 @@ class RawBox
 		if(data==nullptr)
 		{
 			sz=0;
+			/// Out of Memory
 			return -1;
 		}
 		memset(data,0,sz);
@@ -117,8 +122,9 @@ RawBox toRawBox(string rawbox_encoded_str)
 		return box;
 	}
 	char* tp=(char*)(rawbox_encoded_str.c_str());
-	char* psz=strstr(tp,"dtsz#")+5;
+	char* psz=strstr(tp,"#dtsz#")+6;
 	char* pszend=strstr(psz,"#");
+	char* tq=strstr(tp,"#dta#")+5;
 	thread_local char buff[128];
 	memset(buff,0,128);
 	strncpy(buff,psz,pszend-psz);
@@ -129,11 +135,28 @@ RawBox toRawBox(string rawbox_encoded_str)
 	/// Out of Memory.
 	if(nem==nullptr) return box;
 	memset(nem,0,tsz);
-	int gnx=base64_decode_raw(rawbox_encoded_str,nem);
+	int gnx=base64_decode_raw(tq,nem);
 	box.setdata_nocopy(nem,gnx);
-	/// Success.
+	/// Success: Return Converted Bytes.
 	return box;
 }
 
 #endif /// End of _KIRITOW_RAWBOX(rawbox.h)
 
+/**
+/// Example Code.
+RAWBYTE uu[]={0x20,0x30,0x40,0x50,0x60};
+
+int main()
+{
+    int sz=sizeof(uu);
+    RawBox box(uu,sz);
+    printf("%s\n",box.toString().c_str());
+    RawBox tbox=toRawBox(box.toString());
+    printf("Size %d\n",tbox.getsize());
+    for(int i=0;i<tbox.getsize();i++)
+    {
+        printf("%x ",tbox.getdata()[i]);
+    }
+}
+//*/
