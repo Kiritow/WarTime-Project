@@ -6,7 +6,7 @@
 #ifndef _cpplib_extends_base64_raw
 #define _cpplib_extends_base64_raw
 
-#include "base64.h"
+#include "base64_str.h"
 #include <string>
 using namespace std;
 
