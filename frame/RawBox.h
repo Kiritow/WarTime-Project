@@ -27,9 +27,13 @@ class RawBox
 		data=nullptr;
 		sz=0;
 	}
-	RawBox(const RAWBYTE* pdata,int datasz)
+	RawBox(const RAWBYTE* pdata,int datasz) : RawBox()
 	{
 		setdata(pdata,datasz);
+	}
+	RawBox(RawBox& incBox) : RawBox()
+	{
+		setdata(incBox.data,incBox.sz);
 	}
 	~RawBox()
 	{
@@ -41,6 +45,7 @@ class RawBox
 		if(data) free(data);
 		data=nullptr;
 		sz=datasz;
+		if(sz<1) return 0;
 		data=(RAWBYTE*)malloc(sz);
 		if(data==nullptr)
 		{
@@ -77,10 +82,6 @@ class RawBox
 			os<<base64_encode(data,sz);
 		}
 		return os.str();
-	}
-	RawBox(RawBox& incBox)
-	{
-		setdata(incBox.data,incBox.sz);
 	}
 	RawBox& operator = (RawBox& incBox)
 	{
